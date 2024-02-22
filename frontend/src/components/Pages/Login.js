@@ -1,43 +1,51 @@
-import React, { useState} from "react";
-import "./Login.css"
-export const Login = () => {
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+import React, { Component } from 'react'
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+export default class Login extends Component {
+  render() {
+    return (
+      <form>
+        <h3>Login</h3>
 
-    // Password validation criteria
-    if (password.length < 8) {
-      setErrorMessage('Password must be at least 8 characters long');
-      return false;
-    }
+        <div className="mb-3">
+          <label>Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Enter email"
+          />
+        </div>
 
-    // Your form submission logic here
-    const formData = new FormData(e.target);
-    console.log('Form data:', Object.fromEntries(formData.entries()));
+        <div className="mb-3">
+          <label>Password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Enter password"
+          />
+        </div>
 
-    return false;
-  };
-  return (
-<div class="login-form">
-  <form>
-    <h1>Login</h1>
-    <div class="content">
-      <div class="input-field">
-        <input type="email" placeholder="Email" autocomplete="nope"/>
-      </div>
-      <div class="input-field">
-        <input type="password" placeholder="Password" autocomplete="new-password"/>
-      </div>
-      <a href="#" class="link">Forgot Your Password?</a>
-    </div>
-    <div class="action">
-      <button>Register</button>
-      <button>Sign in</button>
-    </div>
-  </form>
-</div>
-  );
-};
-export default  Login;
+        <div className="mb-3">
+          <div className="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="customCheck1"
+            />
+            <label className="custom-control-label" htmlFor="customCheck1">
+              Remember me
+            </label>
+          </div>
+        </div>
+
+        <div className="d-grid">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
+        <p className="forgot-password text-right">
+          Forgot <a href="#">password?</a>
+        </p>
+      </form>
+    )
+  }
+}

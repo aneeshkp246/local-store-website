@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+const connection = require("./db")
 
+connection()
 // Define endpoints
 app.get("/api", (req, res) => {
   res.json({ "users": ["userOne", "userTwo", "userThree", "userFour"] });

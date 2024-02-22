@@ -3,7 +3,7 @@ import NavBar from "./components/Navbar/Nabvar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./components/Pages/Home";
 import { Contact } from "./components/Pages/Contact";
-import { Login } from "./components/Pages/Login";
+import Login from "./components/Pages/Login";
 import {Footer} from "./components/Pages/Footer"
 import Nearby  from "./components/Pages/Nearby";
 import Cart  from "./components/Pages/Cart";
