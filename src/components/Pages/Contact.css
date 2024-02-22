@@ -1,0 +1,104 @@
+body{
+    background-color: #e7eae2 !important;
+}
+#bootstrap-overrides{
+    background: #00d2ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+#company-logo{
+  height: 60px;
+  width: 60px;
+  float: left;
+  margin-right: 15px;
+}
+.btn.btn-outline-success
+{
+    color: #fdc302;
+    border-color: #fdc302;
+}
+.btn.btn-outline-success:hover{
+    background-color: #fdc302;
+    color: rgb(44, 45, 42)
+}
+.bd-example-snippet.bd-code-snippet{
+    margin-top: 150px;
+}
+.top-heading{
+    text-align: center;
+    margin-bottom: 70px;
+}
+.bd-example{
+    margin-bottom: 90px;
+}
+.nav.col-md-4.justify-content-end.list-unstyled.d-flex{
+    margin-left: 16rem;
+}
+.btn.btn-lg.btn-primary{
+    margin-left: 30rem;
+    margin-bottom: 40px;
+    width: 20%;
+}
+#input-email{
+    width: 33% !important;
+    border: 2px solid #1383b3 !important;
+}
+.input-group{
+    margin: auto;
+}
+#exampleInputEmail1{
+    width: 50% !important;
+    margin: auto;
+    border: 1px solid grey;
+
+}
+.input-group-text{
+    width: 10% !important;
+    margin-left: 20rem;
+}
+#message-input{
+height: 7em!important ;
+width: 40% !important;
+border: 1px solid grey;
+border-radius: 4px;
+}
+.navbar-nav.me-auto.mb-2.mb-md-0 li {
+display: inline-block;
+margin-left: 30px;
+padding-top: 6px;
+position: relative;
+}
+
+.navbar-nav.me-auto.mb-2.mb-md-0 a {
+color: #fdc302;
+font-size: 18px !important;
+font-family: 'Merienda','Source Code Pro', monospace;
+font-weight: bold;
+text-decoration: none;
+}
+
+.navbar-nav.me-auto.mb-2.mb-md-0 a:hover {
+color: #000;
+}
+
+.navbar-nav.me-auto.mb-2.mb-md-0 a::before {
+content: '';
+display: block;
+height: 5px;
+background-color: #000000;
+
+position: absolute;
+top: 0;
+width: 0%;
+
+transition: all ease-in-out 250ms;
+}
+
+.navbar-nav.me-auto.mb-2.mb-md-0 a:hover::before {
+width: 100%;
+}
+.nav-link.active {
+color: #f3e1a6 !important;
+pointer-events: none;
+}

@@ -1,80 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { calculateDistance } from '../util';
+import React, { useState, useEffect } from 'react';
 
-export const NearbyRestaurants = () => {
-  const [userLocation, setUserLocation] = useState(null);
-  const [restaurants, setRestaurants] = useState([]);
+const Nearby = () => {
+  const [location, setLocation] = useState(null);
 
   useEffect(() => {
-    // Fetch user's current location
-    if ('geolocation' in navigator) {
+    // Check if geolocation is supported by the browser
+    if (navigator.geolocation) {
+      // Get the current position
       navigator.geolocation.getCurrentPosition(
         (position) => {
+          // Extract latitude and longitude from the position object
           const { latitude, longitude } = position.coords;
-          setUserLocation({ latitude, longitude });
-
-          // Perform a nearby search after getting the user's location
-          searchNearbyRestaurants({ latitude, longitude });
+          setLocation({ latitude, longitude });
         },
         (error) => {
-          console.error('Error getting location:', error.message);
+          console.error('Error getting geolocation:', error);
         }
       );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
     }
   }, []);
 
-  const searchNearbyRestaurants = (location) => {
-    // Create a PlacesService object
-    const placesService = new window.google.maps.places.PlacesService(
-      document.createElement('div')
-    );
-
-    // Define the search parameters
-    const request = {
-      location: new window.google.maps.LatLng(location.latitude, location.longitude),
-      radius: 1000, // Search radius in meters
-      type: 'restaurant', // Search for restaurants
-    };
-
-    // Perform the nearby search
-    placesService.nearbySearch(request, (results, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        // Calculate distances and update state
-        const restaurantsWithDistance = results.map((restaurant) => ({
-          ...restaurant,
-          distance: calculateDistance(
-            location.latitude,
-            location.longitude,
-            restaurant.geometry.location.lat(),
-            restaurant.geometry.location.lng()
-          ),
-        }));
-        setRestaurants(restaurantsWithDistance);
-      } else {
-        console.error('Error fetching nearby restaurants:', status);
-      }
-    });
-  };
-
   return (
     <div>
-      <h2>Nearby Restaurants</h2>
-      {userLocation ? (
+      {location ? (
         <div>
-          <p>Your Current Location: {userLocation.latitude}, {userLocation.longitude}</p>
-          <ul>
-            {restaurants.map((restaurant) => (
-              <li key={restaurant.place_id}>
-                {restaurant.name} - Distance: {restaurant.distance.toFixed(2)} km
-              </li>
-            ))}
-          </ul>
+          <p>Latitude: {location.latitude}</p>
+          <p>Longitude: {location.longitude}</p>
         </div>
       ) : (
-        <p>Fetching location...</p>
+        <p>Loading...</p>
       )}
     </div>
   );
 };
 
-
+export default Nearby;
