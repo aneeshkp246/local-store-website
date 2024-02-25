@@ -1,51 +1,75 @@
-import React, { Component } from 'react'
+import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import  "./Login.css";
 
-export default class Login extends Component {
-  render() {
-    return (
-      <form>
-        <h3>Login</h3>
+const Login = () => {
+	const [data, setData] = useState({ email: "", password: "" });
+	const [error, setError] = useState("");
 
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-          />
-        </div>
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
 
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-          />
-        </div>
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:5000/api/auth";
+			const { data: res } = await axios.post(url, data);
+			localStorage.setItem("token", res.data);
+			window.location = "/";
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
 
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
-        </div>
+	return (
+		<div className="login_container">
+			<div className="login_form_container">
+				<div className="left">
+					<form className="form_container" onSubmit={handleSubmit}>
+						<h1>Login to Your Account</h1>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={handleChange}
+							value={data.email}
+							required
+							className="input"
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							onChange={handleChange}
+							value={data.password}
+							required
+							className="input"
+						/>
+						{error && <div className="error_msg">{error}</div>}
+						<button type="submit" className="white_btn">
+							Login
+						</button>
+					</form>
+				</div>
+				<div className="right">
+					<h1>New Here ?</h1>
+					<Link to="/signup">
+						<button type="button" className="green_btn">
+							Sign Up
+						</button>
+					</Link>
+				</div>
+			</div>
+		</div>
+	);
+};
 
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-        <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
-        </p>
-      </form>
-    )
-  }
-}
+export default Login;

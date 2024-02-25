@@ -90,7 +90,7 @@
     transform: scaleX(1) scaleY(1);
 }
 .container.my-5{
-    padding-top: 60%;
+    padding-top: 80%;
 }
 .p-5.text-center.bg-body-tertiary.rounded-3{
     background: #3CA55C;  /* fallback for old browsers */

@@ -1,58 +1,88 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Nearby = () => {
-  const [location, setLocation] = useState(null);
-  const [backendData, setBackendData] = useState([]); // Initialize state with an empty array
+  const mapRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    fetch("/api")
-      .then(response => response.json())
-      .then(data => {
-        setBackendData(data); // Update state with the fetched data
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+    let map;
+    let infoWindow;
+    let service;
+
+    const initialize = () => {
+      map = new window.google.maps.Map(mapRef.current, {
+        center: { lat: 12.8909341, lng: 77.5357154 },
+        zoom: 15
       });
-  }, []); // Empty dependency array to run the effect only once when the component mounts
-  
-  useEffect(() => {
-    // Check if geolocation is supported by the browser
-    if (navigator.geolocation) {
-      // Get the current position
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // Extract latitude and longitude from the position object
-          const { latitude, longitude } = position.coords;
-          setLocation({ latitude, longitude });
-        },
-        (error) => {
-          console.error('Error getting geolocation:', error);
-        }
+
+      infoWindow = new window.google.maps.InfoWindow();
+
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        inputRef.current
       );
-    } else {
-      console.error('Geolocation is not supported by this browser.');
-    }
+      autocomplete.bindTo('bounds', map);
+
+      autocomplete.addListener('place_changed', () => {
+        infoWindow.close();
+        const place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+          return;
+        }
+
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+        }
+
+        createMarker(place);
+      });
+    };
+
+    const createMarker = (place) => {
+      const marker = new window.google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      });
+
+      window.google.maps.event.addListener(marker, 'click', () => {
+        alert("Do you want to buy something in ", place.name, "?");
+        window.open(place.photos[0].getUrl(), '_blank');
+      });
+
+      const request = {
+        location: place.geometry.location,
+        radius: '500',
+        type: ['home_goods_store', 'supermarket', 'store', 'department_store', 'convenience_store']
+      };
+      service = new window.google.maps.places.PlacesService(map);
+      service.nearbySearch(request, callback);
+    };
+
+    const callback = (results, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        for (let i = 0; i < 10; i++) {
+          const place = results[i];
+          createMarker(results[i]);
+        }
+      }
+    };
+
+    window.google.maps.event.addDomListener(window, 'load', initialize);
+
+    return () => {
+      window.google.maps.event.clearListeners(window, 'load');
+    };
   }, []);
 
   return (
     <div>
-      {location ? (
-        <div>
-          <p>Latitude: {location.latitude}</p>
-          <p>Longitude: {location.longitude}</p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-      {(typeof backendData.users==='undefined') ? (
-        <p>Loading...</p>
-      ):(
-        backendData.users.map((user,i) => (
-          <p key={i}>{user}</p>
-      ))
-      )}
+      <input type="text" size={50} ref={inputRef} />
+      <div ref={mapRef} style={{ height: '500px' }}></div>
     </div>
   );
 };
+
 
 export default Nearby;
