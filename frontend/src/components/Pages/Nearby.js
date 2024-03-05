@@ -97,6 +97,9 @@ const Nearby = () => {
       fetchDataFromApi();
     }, []);
 
+   
+    
+
   return (
     <div>
       <input type="text" size={50} ref={inputRef} />
