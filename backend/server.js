@@ -27,7 +27,7 @@ const testSchema = new mongoose.Schema({
 const TestModel = mongoose.model('Test', testSchema, 'test');
 
 // Define your routes
-app.get('/', async (req, res) => {
+app.get('/api/products', async (req, res) => {
   try {
       // Retrieve data from the "test" collection in the "products" database
       const docs = await TestModel.find({});

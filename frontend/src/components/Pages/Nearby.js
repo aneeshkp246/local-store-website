@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Place from './Place';
+import { fetchData } from './api';
 
+const url = 'http://localhost:5000/api/products';
 const Nearby = () => {
   const mapRef = useRef(null);
   const inputRef = useRef(null);
+  const [currentPlace, setCurrentPlace] = useState("")
 
   useEffect(() => {
     let map;
@@ -47,8 +51,10 @@ const Nearby = () => {
       });
 
       window.google.maps.event.addListener(marker, 'click', () => {
-        alert("Do you want to buy something in ", place.name, "?");
-        window.open(place.photos[0].getUrl(), '_blank');
+        alert(`Do you want to buy something in ${place.name}?`);
+        // window.open(place.photos[0].getUrl(), '_blank');
+        setCurrentPlace( place.name)
+        console.log(currentPlace)
       });
 
       const request = {
@@ -76,13 +82,28 @@ const Nearby = () => {
     };
   }, []);
 
+  const [data, setData] = useState([]);
+
+    useEffect(() => {
+      async function fetchDataFromApi() {
+        try {
+          const fetchedData = await fetchData(url);
+          setData(fetchedData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+      }
+  
+      fetchDataFromApi();
+    }, []);
+
   return (
     <div>
       <input type="text" size={50} ref={inputRef} />
       <div ref={mapRef} style={{ height: '500px' }}></div>
+      { currentPlace && <Place currentPlace={currentPlace} data={data}/>}
     </div>
   );
 };
-
 
 export default Nearby;

@@ -10,6 +10,7 @@ import { Footer } from "./components/Pages/Footer";
 import Nearby from "./components/Pages/Nearby";
 import Cart from "./components/Pages/Cart";
 import { About } from "./components/Pages/About";
+import Place from './components/Pages/Place'
 
 function App() {
   const user = localStorage.getItem("token");
@@ -25,6 +26,7 @@ function App() {
             <Route path="/nearby" element={<Nearby />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/place" element={<Place />} />
             {user && <Route path="/login"  element={<Main />} />}
             <Route path="/signup"  element={<Signup />} />
             <Route path="/login"  element={<Login />} />

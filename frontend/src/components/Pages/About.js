@@ -1,8 +1,30 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./About.css"
 export const About = () => {
   let message = `The team which has worked behind this project\n for the betterment of the society.`;
+  const [data, setData] = useState([]);
 
+
+  useEffect(() => {
+    // Fetch data from an API endpoint
+    fetch("http://localhost:5000/api/products")
+      .then(response => {
+        // Check if the response is successful
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // Parse the JSON response
+        return response.json();
+      })
+      .then(data => {
+        // Update state with the fetched data
+        setData(data);
+      })
+      .catch(error => {
+        // Handle any errors that occur during the fetch
+        console.error('Error fetching data:', error);
+      });
+  }, []);
     return (
       <section class="section-white">
  
@@ -138,7 +160,7 @@ export const About = () => {
         </div> 
     
     </div> 
-
+      <p>{JSON.stringify(data, null, 2)}</p>
     </section>
   );
 };
