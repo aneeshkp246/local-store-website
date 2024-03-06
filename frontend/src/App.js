@@ -27,11 +27,10 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/place" element={<Place />} />
-            {user && <Route path="/login"  element={<Main />} />}
+            {/* {user && <Route path="/login"  element={<Main />} />} */}
             <Route path="/signup"  element={<Signup />} />
             <Route path="/login"  element={<Login />} />
             <Route path="/" element={<Navigate replace to="/login" />} />
-            {/* <Route path="/near" element={<NearbyPage />} /> */}
           </Routes>
         </div>
       </Router>

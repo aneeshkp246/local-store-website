@@ -30,7 +30,7 @@ const Place = ({ currentPlace, data }) => {
           data.map((product) => (
             <div className="product-item" key={product._id}>
               <h2>{product.title}</h2>
-              <img className="product-image" src={product.imageURL} alt={product.title} />
+              <img className="product-image" src={`${product.imageURL}`} alt={product.title} />
               <p className="product-price">Price: &#8377;{product.price}</p>
               <button className="add-to-cart" onClick={() => addToCart(product)}>
                 Add To Cart
