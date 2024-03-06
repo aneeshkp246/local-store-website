@@ -1,7 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React from 'react'
 import "./About.css"
+import ajay from '../../assets/ajay.jpg'
+import aneesh from '../../assets/aneesh.jpeg'
+import ram from '../../assets/ram.jpg'
+import singh from '../../assets/singh.jpg'
+
 export const About = () => {
   let message = `The team which has worked behind this project\n for the betterment of the society.`;
+
     return (
       <section class="section-white">
  
@@ -21,10 +27,10 @@ export const About = () => {
 
                   <div class="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team1a.jpg" class="team-img" alt="pic" />                   
+                      <img src={aneesh} class="team-img" alt="pic" />                   
                       <h3>ANEESH K P</h3>            
                       <div class="team-info"><p>1BM22CS040</p></div>
-                      <p>Johnathan is our  co-founder and has developed search strategies for a variety of clients from international brands to medium sized businesses for over five years.</p>
+                      <p>Aneesh is our  co-founder and has developed search strategies for a variety of clients from international brands to medium sized businesses for over five years.</p>
                   
                       <ul class="team-icon">
                       
@@ -54,13 +60,13 @@ export const About = () => {
 
                   <div class="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team2a.jpg" class="team-img" alt="pic" />
+                      <img src={ajay} class="team-img" alt="pic" />
                      
                       <h3>AJAY N M</h3>
                       
                       <div class="team-info"><p>1BM22CS026</p></div>
 
-                      <p>Graduating with a degree in Spanish and English, Alexandra has always loved writing and now she’s lucky enough to do it as part of her new job inside our agency.</p>
+                      <p>With a spcealization in Spanish and English, Ajay has always loved writing and now he's lucky enough to do it as part of her new job inside our agency.</p>
                   
                       <ul class="team-icon">
                       
@@ -78,16 +84,15 @@ export const About = () => {
 
             </div> 
             <div class="col-sm-6 col-md-4">
-
                   <div class="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team2a.jpg" class="team-img" alt="pic" />
+                      <img src={singh} class="team-img" alt="pic" />
                      
                       <h3>ADITHYA SINGH</h3>
                       
                       <div class="team-info"><p>1BM22CS022</p></div>
 
-                      <p>Graduating with a degree in Spanish and English, Alexandra has always loved writing and now she’s lucky enough to do it as part of her new job inside our agency.</p>
+                      <p>Adithya Singh with a degree in Spanish and English, he has always loved interacting and now he's lucky enough to do it as part of her new job inside our agency.</p>
                   
                       <ul class="team-icon">
                       
@@ -108,13 +113,13 @@ export const About = () => {
 
                   <div class="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team3a.jpg" class="team-img" alt="pic" />
+                      <img src={ram} class="team-img" alt="pic" />
                      
                       <h3>ADITHYA RAM S H</h3>
                       
                       <div class="team-info"><p>1BM22CS019</p></div>
 
-                      <p>Elisa first fell in love with digital marketing at the university. He loves to learn, and looks forward to being part of this new exciting industry for many years.</p>
+                      <p>Adithya Ram first fell in love with digital marketing at the university. He loves to learn, and looks forward to being part of this new exciting industry for many years.</p>
                   
                       <ul class="team-icon">
                       
