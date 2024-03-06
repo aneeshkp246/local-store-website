@@ -85,7 +85,7 @@ export const About = () => {
                      
                       <h3>ADITHYA SINGH</h3>
                       
-                      <div class="team-info"><p>1BM22CS018</p></div>
+                      <div class="team-info"><p>1BM22CS022</p></div>
 
                       <p>Graduating with a degree in Spanish and English, Alexandra has always loved writing and now she’s lucky enough to do it as part of her new job inside our agency.</p>
                   

@@ -41,13 +41,6 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
-const userSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  email: String,
-  password: String,
-  __v: Number
-});
 
 app.post('/api/send-email', async (req, res) => {
   try {
