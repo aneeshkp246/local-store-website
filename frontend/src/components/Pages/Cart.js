@@ -5,18 +5,20 @@ import axios from 'axios';
 
 export const proceedToCheckout = async (cart) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/send-email', { cart });
-      console.log(response.data);
-      alert('Email sent successfully!');
+        const response = await axios.post('http://localhost:5000/api/send-email', { cart });
+        console.log(response.data);
+        alert('Email sent successfully!');
+        alert("Order Sucessfully recieved")
     } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Failed to send email. Please try again later.');
+        console.error('Error sending email:', error);
+        alert('Failed to send email. Please try again later.');
     }
-  };
+};
 
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+
 
   const updateQuantity = (index, quantity) => {
     const updatedCart = [...cartItems];
@@ -49,8 +51,8 @@ const Cart = () => {
             {cartItems.map((item, index) => (
               <li key={index} className="cart-item">
                 <div>
-                  <span className="item-info">{item.title} - &#8377;{item.price}</span>
-                  <span className="item-quantity">Quantity: {item.quantity}</span>
+                  <span className="item-info">{item.title} - &#8377;{item.price} per unit</span>
+                  <span className="item-quantity">&nbsp;Quantity: {item.quantity}</span>
                 </div>
                 <div className="item-buttons">
                   <button className="quantity-button" onClick={() => updateQuantity(index, 1)}>+</button>
@@ -65,7 +67,7 @@ const Cart = () => {
           </div>
           <button className="proceed-to-checkout-button" onClick={() => proceedToCheckout(cartItems)}>
             Proceed to Checkout
-          </button>
+          </button> 
         </div>
       ) : (
         <p className="empty-cart-message">Your cart is empty</p>

@@ -1,6 +1,7 @@
 .section-white {
 	margin-top: 400px;
-	background: #fff;
+	margin-bottom: 100px !important;
+	background: #e3e7e3;
 	padding: 70px 0;
 }
 
