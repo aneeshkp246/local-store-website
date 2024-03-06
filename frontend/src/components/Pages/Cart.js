@@ -70,7 +70,7 @@ const Cart = () => {
           </button> 
         </div>
       ) : (
-        <p className="empty-cart-message">Your cart is empty</p>
+        <p className="empty-cart-message">Your cart is empty!! You gotta buy some stuff soon!</p>
       )}
     </div>
   );
