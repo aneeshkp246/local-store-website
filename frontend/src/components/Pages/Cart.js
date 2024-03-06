@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
 import './Cart.css'; // Import CSS file for styling
+import axios from 'axios';
+
+
+export const proceedToCheckout = async (cart) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/send-email', { cart });
+      console.log(response.data);
+      alert('Email sent successfully!');
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send email. Please try again later.');
+    }
+  };
+
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cart')) || []);
@@ -8,7 +22,7 @@ const Cart = () => {
     const updatedCart = [...cartItems];
     updatedCart[index].quantity += quantity;
     if (updatedCart[index].quantity <= 0) {
-      updatedCart.splice(index, 1); // Remove item if quantity becomes zero
+      updatedCart.splice(index, 1);
     }
     setCartItems(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -23,6 +37,8 @@ const Cart = () => {
 
   // Calculate grand total
   const grandTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+
 
   return (
     <div className="cart-container">
@@ -47,7 +63,9 @@ const Cart = () => {
           <div className="grand-total">
             Grand Total: &#8377;{grandTotal}
           </div>
-          <button className="proceed-to-checkout-button">Proceed to checkout</button>
+          <button className="proceed-to-checkout-button" onClick={() => proceedToCheckout(cartItems)}>
+            Proceed to Checkout
+          </button>
         </div>
       ) : (
         <p className="empty-cart-message">Your cart is empty</p>
