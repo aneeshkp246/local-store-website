@@ -35,8 +35,8 @@ const Place = ({ currentPlace, data }) => {
         data.map((product) => (
           <div className="product-item" key={product._id}>
             <h2 className='product-title'>{product.title}</h2>
-            <img className="product-image" src={product.imageURL} alt={product.title} />
-            <p className="product-price">Price: &#8377;{product.price}</p>
+            <img className="product-image" src={`${product.imageURL}`} alt={product.title} />
+            <p className="product-price">Price: &#8377;{product.price} per {product.unit}</p>
             <div className="product-rating">
               Rating: {renderStars(product.rating)}
             </div>

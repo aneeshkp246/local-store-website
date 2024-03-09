@@ -25,7 +25,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/nearby" element={<Nearby />} />
             <Route path="/cart" element={<Cart />} />
-            {/* <Route path="/contact" element={<Contact />} /> */}
+            <Route path="/contact" element={<Contact />} />
             <Route path="/place" element={<Place />} />
             {/* {user && <Route path="/login"  element={<Main />} />} */}
             <Route path="/signup"  element={<Signup />} />

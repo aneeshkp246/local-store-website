@@ -8,7 +8,7 @@ export const proceedToCheckout = async (cart) => {
         const response = await axios.post('http://localhost:5000/api/send-email', { cart });
         console.log(response.data);
         alert('Email sent successfully!');
-        alert("Order Sucessfully recieved")
+        alert("Order Sucessfully recieved");
     } catch (error) {
         console.error('Error sending email:', error);
         alert('Failed to send email. Please try again later.');

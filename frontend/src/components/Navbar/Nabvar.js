@@ -64,7 +64,7 @@ function NavBar() {
                 Your Cart
               </NavLink>
             </li>
-            {/* <li className="nav-item">
+            <li className="nav-item">
               <NavLink
                 exact
                 to="/contact"
@@ -74,7 +74,7 @@ function NavBar() {
               >
                 Contact Us
               </NavLink>
-              </li> */}
+              </li>
             <li className="nav-item">
               <NavLink
                 exact
