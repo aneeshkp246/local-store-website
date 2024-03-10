@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const { connectToMainDB, connectToProductsDB } = require("./db");
 const userRoutes = require("./routes/users");
@@ -7,6 +6,8 @@ const authRoutes = require("./routes/auth");
 const nodemailer = require("nodemailer");
 const {TestModel} = require("./models/products.js")
 const { generateEmailBody } = require('./routes/emailGen');
+
+const app = express();
 
 connectToMainDB();
 connectToProductsDB();
