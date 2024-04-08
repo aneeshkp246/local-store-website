@@ -1,11 +1,33 @@
-import React from "react";
-import "./Contact.css"
+import React, { useState } from "react";
+import axios from "axios";
+import "./Contact.css";
+
 export const Contact = () => {
+  const [senderEmail, setSenderEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [response, setResponse] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/api/send-query", {
+        senderEmail,
+        message,
+      });
+      setResponse(res.data);
+      setSenderEmail(""); // Clear input after submission
+      setMessage(""); // Clear input after submission
+    } catch (error) {
+      console.error("Error sending email: ", error);
+      setResponse("Failed to send email.");
+    }
+  };
+
   return (
     <>
-    <main>
-        <svg xmlns="http://www.w3.org/2000/svg" style={{display:'none'}}>
-            <symbol id="facebook" viewBox="0 0 16 16">
+      <main>
+        <svg xmlns="http://www.w3.org/2000/svg" style={{ display: "none" }}>
+        <symbol id="facebook" viewBox="0 0 16 16">
                 <path
                     d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
             </symbol>
@@ -19,7 +41,7 @@ export const Contact = () => {
             </symbol>
         </svg>
         <div class="bd-example-snippet bd-code-snippet">
-            <p class="h1" style={{ textAlign: 'center',
+        <p class="h1" style={{ textAlign: 'center',
   marginBottom: '30px',}}>Get In Touch</p>
             </div>
             <h3 style={{textAlign: 'center'}}>Our Social Media Handles</h3> <br/><br/>
@@ -35,14 +57,35 @@ export const Contact = () => {
                         </svg></a></li>
             </ul> <br/><br/>
             <h3 style={{textAlign: 'center'}}>&#128204;Bangalore, India</h3>
-            <label for="exampleInputEmail1" class="form-label"></label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Email"/> <br/>
-            <div class="input-group">
-                <span class="input-group-text">Your Message</span>
-                <input type="text" name="Message" id="message-input"/>
-              </div> <br/><br/>
-              <p><a class="btn btn-lg btn-primary" href="#">Submit</a></p>  
-    </main>  
+            <form onSubmit={handleSubmit}>
+          <label htmlFor="senderEmail">Your Email:</label>
+          <input
+            type="email"
+            id="senderEmail"
+            value={senderEmail}
+            onChange={(e) => setSenderEmail(e.target.value)}
+            required
+          />
+          <div class="input-group">
+            <span class="input-group-text">Your Message</span>
+            <label htmlFor="message">Message:</label>
+            <textarea
+              id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            ></textarea>
+          </div>
+          <br />
+          <br />
+          <p>
+            <button type="submit" class="btn btn-lg btn-primary">
+              Submit
+            </button>
+          </p>
+        </form>
+        
+      </main>
     </>
   );
 };
