@@ -102,3 +102,35 @@ width: 100%;
 color: #f3e1a6 !important;
 pointer-events: none;
 }
+
+#senderEmail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 35%;
+    width: 500px;
+}
+
+.email-title{
+    position: absolute;
+    font-size: 20px;
+    margin-top: -2px;
+    margin-left: 25%;
+}
+
+.input-group-text{
+    width: 200px !important;
+    height: 170px !important;
+    margin-left: 25%;
+    border-radius: 10px !important;
+    font-size: 20px !important;
+}
+
+#message{
+    width: 34%;
+    border-radius: 5px;
+}
+
+.btn.btn-lg.btn-primary{
+    margin: 1% 40%;
+}

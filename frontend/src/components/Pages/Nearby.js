@@ -60,7 +60,7 @@ const Nearby = () => {
       const request = {
         location: place.geometry.location,
         radius: '500',
-        type: ['home_goods_store', 'supermarket', 'store', 'department_store', 'convenience_store']
+        type: ['home_goods_store', 'supermarket', 'store', 'department_store', 'convenience_store', 'provision_store']
       };
       service = new window.google.maps.places.PlacesService(map);
       service.nearbySearch(request, callback);

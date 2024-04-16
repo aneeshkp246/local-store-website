@@ -58,7 +58,7 @@ export const Contact = () => {
             </ul> <br/><br/>
             <h3 style={{textAlign: 'center'}}>&#128204;Bangalore, India</h3>
             <form onSubmit={handleSubmit}>
-          <label htmlFor="senderEmail">Your Email:</label>
+          <label htmlFor="senderEmail" className="email-title">Your Email:</label>
           <input
             type="email"
             id="senderEmail"
@@ -68,7 +68,7 @@ export const Contact = () => {
           />
           <div class="input-group">
             <span class="input-group-text">Your Message</span>
-            <label htmlFor="message">Message:</label>
+            {/* <label htmlFor="message">Message:</label> */}
             <textarea
               id="message"
               value={message}
